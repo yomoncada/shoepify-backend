@@ -45,6 +45,15 @@ router.post('/', isAdmin, async (req, res) => {
     return res.status(400).json({ succes: false, error: 'Formato del cuerpo incorrecto' });
   }
 
+  const product = {
+    nombre,
+    descripcion,
+    codigo,
+    foto,
+    precio,
+    stock
+  }
+
   const createdProduct = await productApi.add(product);
 
   return res.json({ success: true, result: createdProduct });
@@ -54,23 +63,24 @@ router.put('/:id', isAdmin, async (req, res) => {
   const { id } = req.params;
   const { nombre, descripcion, codigo, foto, precio, stock } = req.body;
 
+  if ( !nombre || !descripcion || !codigo || !foto || !precio || !stock ) {
+    return res.status(400).json({ succes: false, error: 'Formato del cuerpo incorrecto' });
+  }
+
   const product = {
     id,
     nombre,
     descripcion,
     codigo,
     foto,
-    precio
+    precio,
+    stock
   }
 
   const existingProduct = await productApi.get(id);
 
   if (!existingProduct) {
     return res.status(404).json({ success: false, error: 'Producto no encontrado' });
-  }
-
-  if ( !nombre || !descripcion || !codigo || !foto || !precio || !stock ) {
-    return res.status(400).json({ succes: false, error: 'Formato del cuerpo incorrecto' });
   }
 
   const modifiedProduct = await productApi.edit(product);
