@@ -54,6 +54,15 @@ router.put('/:id', isAdmin, async (req, res) => {
   const { id } = req.params;
   const { nombre, descripcion, codigo, foto, precio, stock } = req.body;
 
+  const product = {
+    id,
+    nombre,
+    descripcion,
+    codigo,
+    foto,
+    precio
+  }
+
   const existingProduct = await productApi.get(id);
 
   if (!existingProduct) {
