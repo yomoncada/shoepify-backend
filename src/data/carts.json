@@ -1,0 +1,196 @@
+[
+  {
+    "id": 2,
+    "timestamp": 1646706814400,
+    "productos": [
+      {
+        "id": 1,
+        "timestamp": 1646704115629,
+        "nombre": "Remeras",
+        "descripcion": "Estas son remeras",
+        "codigo": "456",
+        "foto": "http://foto.url",
+        "precio": 122.53,
+        "stock": 50
+      },
+      {
+        "id": 1,
+        "timestamp": 1646704115629,
+        "nombre": "Remeras",
+        "descripcion": "Estas son remeras",
+        "codigo": "456",
+        "foto": "http://foto.url",
+        "precio": 122.53,
+        "stock": 50
+      },
+      {
+        "id": 1,
+        "timestamp": 1646704115629,
+        "nombre": "Remeras",
+        "descripcion": "Estas son remeras",
+        "codigo": "456",
+        "foto": "http://foto.url",
+        "precio": 122.53,
+        "stock": 50
+      },
+      {
+        "id": 1,
+        "timestamp": 1646704115629,
+        "nombre": "Remeras",
+        "descripcion": "Estas son remeras",
+        "codigo": "456",
+        "foto": "http://foto.url",
+        "precio": 122.53,
+        "stock": 50
+      },
+      {
+        "id": 2,
+        "timestamp": 1646704137576,
+        "nombre": "Zapato",
+        "descripcion": "Esto es un zapato",
+        "codigo": "123",
+        "foto": "http://foto.url",
+        "precio": 12.5,
+        "stock": 100
+      },
+      {
+        "id": 5,
+        "timestamp": 1646705478517,
+        "nombre": "Zapato",
+        "descripcion": "Esto es un zapato",
+        "codigo": "123",
+        "foto": "http://foto.url",
+        "precio": 12.5,
+        "stock": 100
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "timestamp": 1646710842210,
+    "productos": [
+      {
+        "id": 5,
+        "timestamp": 1646705478517,
+        "nombre": "Zapato",
+        "descripcion": "Esto es un zapato",
+        "codigo": "123",
+        "foto": "http://foto.url",
+        "precio": 12.5,
+        "stock": 100
+      },
+      {
+        "id": 5,
+        "timestamp": 1646705478517,
+        "nombre": "Zapato",
+        "descripcion": "Esto es un zapato",
+        "codigo": "123",
+        "foto": "http://foto.url",
+        "precio": 12.5,
+        "stock": 100
+      },
+      {
+        "id": 5,
+        "timestamp": 1646705478517,
+        "nombre": "Zapato",
+        "descripcion": "Esto es un zapato",
+        "codigo": "123",
+        "foto": "http://foto.url",
+        "precio": 12.5,
+        "stock": 100
+      },
+      {
+        "id": 5,
+        "timestamp": 1646705478517,
+        "nombre": "Zapato",
+        "descripcion": "Esto es un zapato",
+        "codigo": "123",
+        "foto": "http://foto.url",
+        "precio": 12.5,
+        "stock": 100
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "timestamp": 1646710843206,
+    "productos": []
+  },
+  {
+    "id": 5,
+    "timestamp": 1646710843680,
+    "productos": [
+      {
+        "id": 4,
+        "timestamp": 1646705475970,
+        "nombre": "Zapato",
+        "descripcion": "Esto es un zapato",
+        "codigo": "123",
+        "foto": "http://foto.url",
+        "precio": 12.5,
+        "stock": 100
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "timestamp": 1646710843961,
+    "productos": [
+      {
+        "id": 5,
+        "timestamp": 1646705478517,
+        "nombre": "Zapato",
+        "descripcion": "Esto es un zapato",
+        "codigo": "123",
+        "foto": "http://foto.url",
+        "precio": 12.5,
+        "stock": 100
+      },
+      {
+        "id": 5,
+        "timestamp": 1646705478517,
+        "nombre": "Zapato",
+        "descripcion": "Esto es un zapato",
+        "codigo": "123",
+        "foto": "http://foto.url",
+        "precio": 12.5,
+        "stock": 100
+      },
+      {
+        "id": 5,
+        "timestamp": 1646705478517,
+        "nombre": "Zapato",
+        "descripcion": "Esto es un zapato",
+        "codigo": "123",
+        "foto": "http://foto.url",
+        "precio": 12.5,
+        "stock": 100
+      },
+      {
+        "id": 5,
+        "timestamp": 1646705478517,
+        "nombre": "Zapato",
+        "descripcion": "Esto es un zapato",
+        "codigo": "123",
+        "foto": "http://foto.url",
+        "precio": 12.5,
+        "stock": 100
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "timestamp": 1646710844236,
+    "productos": []
+  },
+  {
+    "id": 8,
+    "timestamp": 1646710844477,
+    "productos": []
+  },
+  {
+    "id": 9,
+    "timestamp": 1646710844747,
+    "productos": []
+  }
+]
