@@ -4,7 +4,7 @@ const cartRoutes = require('./cart/cart.routes');
 
 const router = express.Router();
 
-router.use('/productos', productsRoutes);
-router.use('/carrito', cartRoutes);
+router.use('/products', productsRoutes);
+router.use('/carts', cartRoutes);
 
 module.exports = router;
