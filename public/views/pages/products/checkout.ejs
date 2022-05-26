@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <%- include('../../layouts/head.ejs') %>
+	</head>
+	<body>
+		<!-- Start preloader -->
+		<div id="preloader"></div>
+		<!-- End preloader -->
+
+		<!-- Search Screen start -->
+		<div class="sidebar-search-wrap">
+		    <div class="sidebar-table-container">
+			    <div class="sidebar-align-container">
+			        <div class="search-closer right-side"></div>
+			        <div class="search-container">
+			          <form method="get" id="search-form">
+			            <input type="text" id="s" class="search-input" name="s" placeholder="Search text">
+			          </form>
+			          <span>Search and Press Enter</span>
+			        </div>
+			    </div>
+		    </div>
+		</div>
+		<!-- Search Screen end -->
+
+		<div class="main" id="main">
+            <%- include('../../layouts/header.ejs') %>
+
+			<section class="page-banner">
+				<div class="container">
+					<div class="page-banner-in">
+						<div class="row">
+							<div class="col-xl-6 col-lg-6 col-12">
+								<h1 class="page-banner-title text-uppercase">Checkout</h1>
+							</div>
+							<div class="col-xl-6 col-lg-6 col-12">
+								<ul class="right-side">
+									<li><a href="/">Home</a></li>
+									<li><a href="/cart">Cart</a></li>
+									<li>Checkout</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="checkout pt-100">
+				<div class="container">
+					<form action="javascript:;" id="checkoutForm">
+						<input type="hidden" name="user" id="user" value="<%= user.id %>">
+						<input type="hidden" name="cart" id="cart" value="<%= cart.id %>">
+						<div class="row">
+							<div class="col-lg-8 col-12">
+								<div class="billing-details">
+									<div class="shiping-detail">
+										<div class="row">
+											<div class="col-lg-12 col-12">
+												<h2 class="checkout-title mb-30">Shipping Details</h2>
+												<div class="checkout-form">
+													<div class="row">
+														<div class="col-12">
+															  <div class="form-group">
+																<label class="form-label">Country*</label>
+																<input type="text" class="form-control" name="country" id="country" required>
+															  </div>
+														</div>
+														<div class="col-12">
+															  <div class="form-group">
+																<label class="form-label">Address*</label>
+																<input type="text" class="form-control" placeholder="Street address" name="address" id="address" value="<%= user.address %>" required>
+															  </div>
+														</div>
+														<div class="col-lg-6 col-md-6 col-12">
+															<div class="form-group">
+																<label class="form-label">Pastcode / Zip</label>
+																<input type="text" class="form-control" name="zipCode" id="zipCode">
+															  </div>
+														</div>
+														<div class="col-lg-6 col-md-6 col-12">
+															<div class="form-group">
+																<label class="form-label">Town / City*</label>
+																<input type="text" class="form-control" name="city" id="city" required>
+															  </div>
+														</div>
+													</div>
+											    </div>
+											    <h3 class="checkout-sub">Order Notes</h3>
+											    <div class="order-note">
+											       	<p class="order-note-text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a</p>
+											    </div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-4 col-12">
+								<div class="your-order">
+									<h2 class="checkout-title mb-30">Your order</h2>
+									<div class="seller">
+										<% cart.products.forEach(function(product, index, products) { %>
+											<div class="seller-box align-flax w-100">
+												<div class="seller-img">
+													<a href="/product-detail/<%= product['_id'] %>" class="display-b">
+														<img src="<%= product.thumbnail %>" alt="shoes" class="transition">
+													</a>
+												</div>
+												<div class="seller-contain pl-15">
+													<a href="/product-detail/<%= product['_id'] %>" class="product-name text-uppercase"><%= product.NAME %></a>
+													<span class="product-pricce">$<%= product.price %></span>
+													<div class="checkout-qty">
+														<label>Qty: </label>
+														<span class="info-deta">1</span> 
+													</div>
+												</div>
+											</div>
+										<% }) %>
+									</div>
+									<div class="subtotal-main">
+										<div class="subtotal-head">
+											<div class="row">
+												<div class="col-6">
+													<label>sub total</label>
+												</div>
+												<div class="col-6 text-right">
+													<span>$<%= cart.total %></span>
+												</div>
+											</div>
+										</div>
+										<div class="shiping">
+											<span>Shiping</span>
+										</div>
+										<div class="shiping-type">
+											<div class="row">
+												<div class="col-6">
+													<div class="radio-btn">
+												      	<input type="radio" id="standard" name="gender" value="standard">
+												      	<label class="custom-radio" for="standard">Standard:</label>
+												    </div>
+												</div>
+												<div class="col-6 text-right">
+													<span>FREE</span>
+												</div>
+											</div>
+										</div>
+										<!-- <div class="shiping-type">
+											<div class="row">
+												<div class="col-6">
+													<div class="radio-btn">
+												      	<input type="radio" id="standard" name="gender" value="standard">
+												      	<label class="custom-radio" for="standard">Standard:</label>
+												    </div>
+												</div>
+												<div class="col-6 text-right">
+													<span>$56.00</span>
+												</div>
+											</div>
+										</div>
+										<div class="shiping-type">
+											<div class="row">
+												<div class="col-6">
+													<div class="radio-btn">
+														<input type="radio" id="express" name="gender" value="express">
+												      	<label class="custom-radio" for="express">Express:</label>
+												    </div>
+												</div>
+												<div class="col-6 text-right">
+													<span>$86.00</span>
+												</div>
+											</div>
+										</div> -->
+										<div class="total-all">
+											<div class="total-border">
+												<div class="row">
+													<div class="col-6">
+														<label>Total</label>
+													</div>
+													<div class="col-6 text-right">
+														<span><%= cart.total %></span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<button type="submit" class="btn btn-color">Place order</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</section>
+
+			<%- include('../../layouts/topScrolling.ejs') %>
+			<%- include('../../layouts/footer.ejs') %>
+		</div>
+	
+		<%- include('../../layouts/scripts.ejs') %>
+		<script>
+			var checkout = new Object;
+
+			$(document).ready(async () => {
+				try {
+					checkout = new Checkout('checkout');
+
+					checkout.elements = {
+						form: '#checkoutForm'
+					};
+
+					$(checkout.elements.form).off('submit');
+
+					$(checkout.elements.form).on('submit', (e) => {
+						checkout.submitForm();
+					});
+				} catch (error) {
+					throw new Error(error);
+				}
+			});
+		</script>
+	</body>
+</html>

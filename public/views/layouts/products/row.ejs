@@ -1,0 +1,27 @@
+<tr>
+    <td class="text-left">
+        <div class="seller-box align-flax w-100">
+            <div class="seller-img">
+                <a href="/product-detail/<%= product.id %>" class="display-b">
+                    <img src="<%= product.thumbnail %>" alt="shoes" class="transition">
+                </a>
+            </div>
+            <div class="seller-contain pl-15">
+                <a href="/product-detail/<%= product.id %>" target="_blank" class="product-name text-uppercase"><%= product.name %></a>
+            </div>
+        </div>
+    </td>
+    <td><span class="price">$ <%= product.price %></span></td>
+    <td>
+        <select data-id="100" class="quantity_cart" name="quantity_cart">
+              <option selected="" value="1">1</option>
+        </select>
+    </td>
+    <td><span class="price">$ <%= product.price %></span></td>
+    <td>
+        <ul>
+            <li><a href="cart.html"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
+            <li><a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+        </ul>
+    </td>
+</tr>

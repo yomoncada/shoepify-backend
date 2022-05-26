@@ -1,23 +1,49 @@
-const express = require('express');
-const apiRoutes = require('./routers/index');
+require('dotenv').config()
+const os = require('os');
+const cluster = require('cluster');
+/* const minimist = require('minimist'); */
 
-const app = express();
-const PORT = process.env.PORT || 8080;
+const server = require('./utils/server.utils');
 
-app.use(express.static('public'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+/* const args = minimist(process.argv.slice(2), {
+    default: {
+      PORT: 8080,
+      MODE: 'FORK'
+    },
+    alias: {
+      p: 'PORT',
+      m: 'MODE'
+    }
+}); */
 
-app.use('/api', apiRoutes);
+const args = {
+  PORT: process.env.PORT || 8080,
+  MODE: process.env.MODE || 'FORK'
+};
 
-app.get('*', function(req, res) {
-  res.send({error: -2, descripcion: `ruta ${req.originalUrl} método ${req.method} no implementada`});
-});
+const numCPUs = os.cpus().length;
 
-const connectedServer = app.listen(PORT, ()=> {
-  console.log(`Server is up and running on port ${PORT}`);
-});
+if (args.MODE == 'CLUSTER') {
+  console.log(`${numCPUs} processes was taken by node.`);
+  
+  if (cluster.isMaster) {
+    console.log(`Primary ${process.pid} is running`);
 
-connectedServer.on('error', (error) => {
-  console.error('Error: ', error);
-})
+    for (let i = 0; i < numCPUs; i++) {
+      cluster.fork();
+    }
+
+    cluster.on('exit', (worker, code, signal) => {
+      console.log(`Worker ${worker.process.pid} died`);
+    });
+  } else {
+    console.log(`Worker ${process.pid} started`);
+
+    server.init(args);
+  }
+} else {
+  console.log(`1 process was taken by node.`);
+  console.log(`Process ${process.pid} is running`);
+
+  server.init(args);
+}

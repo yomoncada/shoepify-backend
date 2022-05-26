@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<%- include('../../layouts/head.ejs') %>
+	</head>
+	<body>
+		<div class="main" id="main">
+			<section class="login pt-100">
+				<div class="container">
+					<div class="billing-details">
+						<h2 class="checkout-title text-uppercase text-center mb-30">CUSTOMER LOGIN</h2>
+						<form class="checkout-form" action="/login" method="POST" id="loginForm">
+							<div class="form-group">
+								<label class="form-label" for="email">Email address</label>
+								<input type="text" class="form-control" name="email" id="email" placeholder="Enter your email address" required>
+							</div>
+							<div class="form-group">
+								<label class="form-label"for="password" >Password</label>
+								<input type="password" class="form-control" name="password" id="password" placeholder="Enter your password" required>
+							</div>
+							<div class="login-btn-g">
+								<div class="row">
+							        <div class="col-12">
+							            <button name="submit" type="submit" class="btn btn-color right-side" id="loginSubmitButton">Log In</button>
+							        </div>
+							    </div>
+					        </div>
+					        <div class="new-account text-center mt-20"> 
+					        	<span>Don't have an account?</span> 
+				                <a class="link" title="Create New Account" href="/register">Create New Account</a> 
+				            </div>
+						</form>
+					</div>
+				</div>
+			</section>
+		</div>
+		<%- include('../../layouts/scripts.ejs') %>
+	</body>
+</html>

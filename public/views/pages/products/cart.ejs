@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <%- include('../../layouts/head.ejs') %>
+	</head>
+	<body>
+		<!-- Start preloader -->
+		<div id="preloader"></div>
+		<!-- End preloader -->
+
+		<!-- Search Screen start -->
+		<div class="sidebar-search-wrap">
+		    <div class="sidebar-table-container">
+			    <div class="sidebar-align-container">
+			        <div class="search-closer right-side"></div>
+			        <div class="search-container">
+			          <form method="get" id="search-form">
+			            <input type="text" id="s" class="search-input" name="s" placeholder="Search text">
+			          </form>
+			          <span>Search and Press Enter</span>
+			        </div>
+			    </div>
+		    </div>
+		</div>
+		<!-- Search Screen end -->
+
+		<div class="main" id="main">
+            <%- include('../../layouts/header.ejs') %>
+
+			<section class="page-banner">
+				<div class="container">
+					<div class="page-banner-in">
+						<div class="row">
+							<div class="col-xl-6 col-lg-6 col-12">
+								<h1 class="page-banner-title text-uppercase">Cart</h1>
+							</div>
+							<div class="col-xl-6 col-lg-6 col-12">
+								<ul class="right-side">
+									<li><a href="/">Home</a></li>
+									<li>Cart</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="pt-100">
+				<div class="container">
+					<div class="wishlist-table">
+						<div class="responsive-table">
+							<table class="table border text-center">
+								<thead>
+									<tr>
+										<th>Product</th>
+										<th>Price</th>
+										<th>Quantity</th>
+										<th>Sub Total</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<% cart.products.forEach(function(product, index, products) { %>
+										<tr data-product-row-index="<%= index %>">
+											<td class="text-left">
+												<div class="seller-box align-flax w-100">
+													<div class="seller-img">
+														<a href="/product-detail/<%= product.id %>" class="display-b">
+															<img src="<%= product.thumbnail %>" alt="shoes" class="transition">
+														</a>
+													</div>
+													<div class="seller-contain pl-15">
+														<a href="/product-detail/<%= product.id %>" target="_blank" class="product-name text-uppercase"><%= product.name %></a>
+													</div>
+												</div>
+											</td>
+											<td><span class="price">$<%= product.price %></span></td>
+											<td>
+												<select class="quantity_cart productQuantity" name="quantity_cart" data-product-price="<%= product.price %>" data-product-id="<%= product.id %>" data-cart-id="<%= cart.id %>" data-index="<%= index %>">
+													<% for (var i=1; i <=product.stock;  i++) { %>
+														<% if(i == 1) { %>
+															<option value="<%= i %>" selected=""><%= i %></option>
+															<% } else{ %>  
+															<option value="<%= i %>"><%= i %></option>
+														 <% } %>
+													<% } %>
+												</select>
+											</td>
+											<td><span class="price">$<%= product.price %></span></td>
+											<td>
+												<ul>
+													<li><a href="/cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
+													<li><a href="javascript:;" class="deleteCartProduct" data-index="<%= index %>" data-cart-id="<%= cart.id %>" data-product-id="<%= product.id %>"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+												</ul>
+											</td>
+										</tr>
+									<% }) %>
+								</tbody>
+							</table>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="share-wishlist shoping-con">
+									<a href="/" class="btn"><i class="fa fa-angle-left"></i> Continue Shopping</a>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="share-wishlist">
+									<a href="javascript:;" class="btn" id="updateCartProducts">Update Cart</a>
+								</div>
+							</div>
+						</div>
+						<div class="estimate">
+							<div class="row">
+								<div class="col-md-6 offset-md-6">
+									<div class="cart-total-table">
+										<div class="responsive-table">
+											<table class="table border">
+												<thead>
+													<tr>
+														<th colspan="2">Cart Total</th>
+													</tr>
+												</thead>
+												<tbody>
+								                    <tr>
+								                      	<td>Item(s) Subtotal</td>
+								                      	<td>
+								                        	<div class="price-box"> 
+								                          		<span class="price cartTotal">$<%= cart.total %></span> 
+								                        	</div>
+								                      	</td>
+								                    </tr>
+								                    <tr>
+								                      	<td>Shipping</td>
+								                      	<td>
+								                        	<div class="price-box"> 
+								                          		<span class="price">$0.00</span> 
+								                        	</div>
+								                      	</td>
+								                    </tr>
+								                    	<tr>
+								                      	<td class="payable"><b>Amount Payable</b></td>
+								                      	<td>
+								                        	<div class="price-box"> 
+								                          		<span class="price cartTotal">$<%= cart.total %></span> 
+								                        	</div>
+								                      	</td>
+								                    </tr>
+								                </tbody>
+											</table>
+										</div>
+										<div class="share-wishlist">
+											<a href="/checkout" class="btn btn-color">Proceed to checkout <i class="fa fa-angle-right"></i></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<%- include('../../layouts/topScrolling.ejs') %>
+			<%- include('../../layouts/footer.ejs') %>
+		</div>
+        <%- include('../../layouts/scripts.ejs') %>
+		<script>
+			var cart = new Object;
+
+			$(document).ready(async () => {
+				try {
+					cart = new Cart('cart');
+
+					cart.elements = {
+						buttons: {
+							update: '#updateCartProducts',
+							delete: '.deleteCartProduct'
+						}
+					}
+
+					$(cart.elements.buttons.update).off('click');
+					$(cart.elements.buttons.delete).off('click');
+
+					$(cart.elements.buttons.update).on('click', function() {
+						cart.update('.productQuantity');
+					});
+			
+					$(cart.elements.buttons.delete).on('click', function() {
+						cart.deleteProduct($(this).data('cartId'), $(this).data('productId'), $(this).data('index'));
+					});
+				} catch (error) {
+					throw new Error(error);
+				}
+			});
+		</script>
+	</body>
+</html>

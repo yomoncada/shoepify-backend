@@ -1,38 +1,44 @@
-const { ENV: { PERS } } = require('../../../config');
+require('dotenv').config()
 
-let Product;
-let Cart;
+const PERS = process.env.PERS || 'mongodb';
+
+let ProductsDao;
+let CartsDao;
+let UsersDao;
+let OrdersDao;
 
 switch(PERS) {
     case 'firebase':
-        Product = require('./products/FirebaseProductsDao');
-        Cart = require('./carts/FirebaseCartsDao');
+        ProductsDao = require('./products/Products.Firebase.dao');
+        CartsDao = require('./carts/Carts.Firebase.dao');
+        UsersDao = require('./users/Users.Firebase.dao');
+        OrdersDao = require('./orders/Orders.Firebase.dao');
         break;
     case 'mongodb':
-        Product = require('./products/MongoDBProductsDao');
-        Cart = require('./carts/MongoDBCartsDao');
-        break;
-    case 'mariadb':
-        Product = require('./products/MariaDBProductsDao');
-        Cart = require('./carts/MariaDBCartsDao');
-        break;
-    case 'sqlite':
-        Product = require('./products/SQLiteProductsDao');
-        Cart = require('./carts/SQLiteCartsDao');
+        ProductsDao = require('./products/Products.MongoDB.dao');
+        CartsDao = require('./carts/Carts.MongoDB.dao.js');
+        UsersDao = require('./users/Users.MongoDB.dao.js');
+        OrdersDao = require('./orders/Orders.MongoDB.dao.js');
         break;
     case 'file':
-        Product = require('./products/FileProductsDao');
-        Cart = require('./carts/FileCartsDao');
+        ProductsDao = require('./products/Products.File.dao.js');
+        CartsDao = require('./carts/Carts.File.dao');
+        UsersDao = require('./users/Users.File.dao');
+        OrdersDao = require('./orders/Orders.File.dao');
         break;
     case 'memory':
-        Product = require('./products/MemoryProductsDao');
-        Cart = require('./carts/MemoryCartsDao');
+        ProductsDao = require('./products/Products.Memory.dao');
+        CartsDao = require('./carts/Carts.Memory.dao.js');
+        UsersDao = require('./users/Users.Memory.dao.js');
+        OrdersDao = require('./orders/Orders.Memory.dao.js');
         break;
     default:
         throw new Error('Invalid persistent method');
 }
 
 module.exports = {
-    Cart,
-    Product
+    CartsDao,
+    ProductsDao,
+    UsersDao,
+    OrdersDao
 }

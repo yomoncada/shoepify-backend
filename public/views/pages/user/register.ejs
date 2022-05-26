@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<%- include('../../layouts/head.ejs') %>
+	</head>
+	<body>
+		<div class="main" id="main">
+			<section class="login pt-100">
+				<div class="container">
+					<div class="billing-details">
+						<h2 class="checkout-title text-uppercase text-center mb-30">CREATE ACCOUNT</h2>
+						<form class="checkout-form" action="/register" enctype="multipart/form-data" method="POST" id="registerForm">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input class="form-control" type="text" name="name" id="name" placeholder="Enter your name" required>
+              </div>
+              <div class="form-group">
+                <label for="address">Address</label>
+                <textarea class="form-control" name="address" id="address" placeholder="Enter your address"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="age">Age</label>
+                <input class="form-control" type="number" name="age" id="age" placeholder="Enter your age">
+              </div>
+              <div class="form-group">
+                <label for="phoneNumber">Phone Number</label>
+                <input class="form-control" type="text" name="phoneNumber" id="phoneNumber" placeholder="Enter your phone number">
+              </div>
+              <div class="form-group">
+                <label for="avatar">Avatar</label>
+                <input type="file" name="avatar" id="avatar"/>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input class="form-control" type="text" name="email" id="email" placeholder="Enter an email address" required>
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input class="form-control" type="password" name="password" id="password" placeholder="Enter a password" required>
+              </div>
+              <div class="form-group">
+                <label for="repeatedPassword">Re-enter Password</label>
+                <input class="form-control" type="password" name="repeatedPassword" id="repeatedPassword" placeholder="Re-enter Password" required>
+              </div>
+							<div class="login-btn-g">
+								<div class="row">
+                  <div class="col-12">
+                    <button name="submit" type="submit" class="btn btn-color right-side">Sign up</button>
+                  </div>
+                </div>
+              </div>
+              <div class="new-account text-center mt-20"> 
+                <span>Already have an account with us</span> 
+                <a class="link" title="Create New Account" href="/login">Login Here</a> 
+              </div>
+						</form>
+					</div>
+				</div>
+			</section>
+		</div>
+    <%- include('../../layouts/scripts.ejs') %>
+	</body>
+</html>

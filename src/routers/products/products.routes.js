@@ -22,10 +22,12 @@ const isAdmin = (req, res, next) => {
 
 const router = express.Router();
 
-router.get('/', getAllProducts);
-router.get('/:id', getProductById);
-router.post('/', isAdmin, createProduct);
-router.put('/:id', isAdmin, updateProductById);
-router.delete('/:id', isAdmin, deleteProductById);
+router.route('/')
+  .get(getAllProducts)
+  .post(isAdmin, createProduct);
+router.route('/:id')
+  .get(getProductById)
+  .put(isAdmin, updateProductById)
+  .delete(isAdmin, deleteProductById);
 
 module.exports = router;
