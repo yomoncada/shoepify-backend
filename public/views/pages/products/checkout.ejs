@@ -99,19 +99,19 @@
 								<div class="your-order">
 									<h2 class="checkout-title mb-30">Your order</h2>
 									<div class="seller">
-										<% cart.products.forEach(function(product, index, products) { %>
+										<% cart.products.forEach(function(cartProduct, index, cartProducts) { %>
 											<div class="seller-box align-flax w-100">
 												<div class="seller-img">
-													<a href="/product-detail/<%= product['_id'] %>" class="display-b">
-														<img src="<%= product.thumbnail %>" alt="shoes" class="transition">
+													<a href="/product-detail/<%= cartProduct.product.id %>" class="display-b">
+														<img src="<%= cartProduct.product.thumbnail %>" alt="shoes" class="transition">
 													</a>
 												</div>
 												<div class="seller-contain pl-15">
-													<a href="/product-detail/<%= product['_id'] %>" class="product-name text-uppercase"><%= product.NAME %></a>
-													<span class="product-pricce">$<%= product.price %></span>
+													<a href="/product-detail/<%= cartProduct.product.id %>" class="product-name text-uppercase"><%= cartProduct.product.name %></a>
+													<span class="product-pricce">$<%= cartProduct.product.price %></span>
 													<div class="checkout-qty">
 														<label>Qty: </label>
-														<span class="info-deta">1</span> 
+														<span class="info-deta"><%= cartProduct.quantity %></span> 
 													</div>
 												</div>
 											</div>

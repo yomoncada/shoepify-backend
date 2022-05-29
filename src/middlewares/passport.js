@@ -38,12 +38,10 @@ passport.use('register', new LocalStrategy(
         address: req.body.address,
         age: req.body.age,
         phoneNumber: req.body.phoneNumber,
-        avatar: req.body.avatar,
+        avatar: req.file,
         createdAt: new Date(),
         updatedAt: new Date()
       };
-
-      console.log(newUser);
 
       const user = await User.create(newUser);
 

@@ -23,10 +23,10 @@ const init = (args) => {
     /* const Message = new MessagesDao;
     const Product = new ProductsDao; */
 
-    app.use(express.static('public'))
-    /* app.use(express.json());
-    app.use(express.urlencoded({extended: true})); */
-    app.use(formidable());
+    app.use(express.static('public'));
+    app.use(express.json());
+    app.use(express.urlencoded({extended: true}));
+    /* app.use(formidable()); */
 
     app.set('views', './public/views');
     app.set('view engine', 'ejs');

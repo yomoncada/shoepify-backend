@@ -3,7 +3,6 @@ const cartUtil = require('../utils/cart.utils');
 const cartContainer = new CartsDao;
 const productContainer = new ProductsDao;
 
-
 const createCart = async (req, res, next) => {
     try {
         const userId = req.session.user.id;
@@ -55,23 +54,31 @@ const deleteCart = async (req, res, next) => {
 
 const updateCartProducts = async (req, res, next) => {
     try {
-        const { fields: { products } } = req;
-
-
-        return res.status(200).json({ success: true, data: products });
-        /* let { id } = req.params;
-
-        if (!id || id == 'null') {
-            id = req.session.cart['_id']
-        }
+        const { body: { cartProducts: cartProductsToUpdate } } = req;
+        const { session: { cart } } = req;
         
-        const cartProducts = await cartUtil.getProducts(id);
+        const cartExistingProducts = await cartUtil.getProducts(cart.id);
     
-        if (!cartProducts) {
+        if (!cartExistingProducts) {
           return res.status(404).json({ success: false, error: 'Carrito no encontrado' });
         }
-    
-        return res.status(200).json({ success: true, data: cartProducts }); */
+        
+        let updatedCartProducts = [];
+        
+        cartProductsToUpdate.forEach((cartProductToUpdate) => {
+            const cartExistingProductIndex = cartExistingProducts.findIndex((cartProduct) => cartProduct.product.id == cartProductToUpdate.product.id);
+
+            if (cartExistingProductIndex > -1) {
+                updatedCartProducts.push({
+                    id: cartExistingProducts[cartExistingProductIndex].product.id,
+                    quantity: cartProductToUpdate.quantity
+                });
+            }
+        })
+
+        const modifiedCart = await cartContainer.update(cart.id, { products: updatedCartProducts });
+
+        return res.status(200).json({ success: true, data: modifiedCart });
     } catch (error) {
         throw new Error(error.message);
     }
@@ -82,7 +89,7 @@ const getCartProducts = async (req, res, next) => {
         let { id } = req.params;
 
         if (!id || id == 'null') {
-            id = req.session.cart['_id']
+            id = req.session.cart._id
         }
         
         const cartProducts = await cartUtil.getProducts(id);
@@ -99,8 +106,7 @@ const getCartProducts = async (req, res, next) => {
 
 const addProductToCart = async (req, res, next) => {
     try {
-        const { params: { id }, fields: { productId, quantity } } = req;
-
+        const { params: { id }, body: { productId, quantity } } = req;
 
         const existingCart = await cartContainer.get(id);
 
@@ -114,13 +120,18 @@ const addProductToCart = async (req, res, next) => {
             return res.status(404).json({ success: false, error: 'Producto no encontrado' });
         }
 
-        const products = existingCart.products;
+        let products = existingCart.products;
 
-        for (var i=0; i<quantity; i++) {
-            products.push(existingProduct.id);
+        const cartProductIndex = products.findIndex((product) => product.id == productId);
+
+        if (cartProductIndex > -1) {
+            products[cartProductIndex].quantity += +quantity;
+        } else {
+            products.push({
+                id: productId,
+                quantity: quantity
+            });
         }
-
-        products.push(existingProduct.id);
       
         const modifiedCart = await cartContainer.update(id, { products: products });
       
@@ -146,12 +157,12 @@ const deleteProductFromCart = async (req, res, next) => {
             return res.status(404).json({ success: false, error: 'Producto no encontrado' });
         }
 
-        const products = existingCart.products;
+        let products = existingCart.products;
 
         const cartProductIndex = existingCart.products.findIndex((id) => id == productId);
 
         if(cartProductIndex > -1) {
-            existingCart.products.splice(cartProductIndex, 1);
+            products.splice(cartProductIndex, 1);
         }
 
         const modifiedCart = await cartContainer.update(cartId, { products: products });

@@ -21,16 +21,17 @@ router.get('/', auth.isLoggedIn, async (req, res, next) => {
       let cart = await cartUtil.getByUser(session.user.id);
 
       if (!cart) {
-        let cart = await cartUtil.create(session.user.id);
+        cart = await cartUtil.create(session.user.id);
       }
 
-      const cartProducts = await cartUtil.getProducts(cart['_id']);
+      const cartProducts = await cartUtil.getProducts(cart._id);
+      const cartTotals = await cartUtil.getTotals(cartProducts);
 
       session.cart = {
-        id: cart['_id'],
+        id: cart._id,
         products: cartProducts,
-        total: await cartUtil.getTotal(cartProducts),
-        count: cartProducts.length
+        total: cartTotals.totalPrice,
+        count: cartTotals.totalItems
       };
     }
 
@@ -68,12 +69,12 @@ router.get('/product-detail/:id', auth.isLoggedIn, async (req, res, next) => {
 router.get('/cart', auth.isLoggedIn, async (req, res, next) => {
   try {
     const cartProducts = await cartUtil.getProducts(req.session.cart.id);
-
+    const cartTotals = await cartUtil.getTotals(cartProducts);
     const cart = {
       id: req.session.cart.id,
       products: cartProducts,
-      total: await cartUtil.getTotal(cartProducts),
-      count: cartProducts.length
+      total: cartTotals.totalPrice,
+      count: cartTotals.totalItems
     };
 
     res.render('pages/products/cart', {cart});
@@ -85,12 +86,13 @@ router.get('/cart', auth.isLoggedIn, async (req, res, next) => {
 router.get('/checkout', auth.isLoggedIn, async (req, res, next) => {
   try {
     const cartProducts = await cartUtil.getProducts(req.session.cart.id);
+    const cartTotals = await cartUtil.getTotals(cartProducts);
 
     const cart = {
       id: req.session.cart.id,
       products: cartProducts,
-      total: await cartUtil.getTotal(cartProducts),
-      count: cartProducts.length
+      total: cartTotals.totalPrice,
+      count: cartTotals.totalItems
     };
 
     const user = req.session.user;

@@ -50,7 +50,7 @@ class Product {
                 list.empty();
 
                 response.data.forEach(async (product) => {  
-                    const layout = await getProductCardLayout(product['_id']);
+                    const layout = await getProductCardLayout(product._id);
                     list.append(layout.data);
                 });
 

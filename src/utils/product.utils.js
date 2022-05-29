@@ -25,7 +25,21 @@ const create = async (product) => {
     }
 }
 
+const decrease = async (id, quantity) => {
+    const product = await productContainer.get(id);
+    
+    if (product) {
+        const newStock = product.stock - quantity;
+
+        const updatedProduct = await productContainer.update(id, {stock: newStock});
+
+        return updatedProduct;
+    }
+
+    return true;
+}
 module.exports = {
     get,
-    create
+    create,
+    decrease
 }

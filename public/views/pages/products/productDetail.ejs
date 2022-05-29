@@ -145,7 +145,7 @@
 						<% relatedProducts.forEach(function(relatedProduct, index, relatedProducts) { %>
 							<div class="featured-product mb-25">
 								<div class="product-img transition mb-15">
-									<a href="/product-detail/<%= relatedProduct['_id'] %>">
+									<a href="/product-detail/<%= relatedProduct._id %>">
 										<img src="<%= relatedProduct.thumbnail %>" alt="product" class="transition">
 									</a>
 									<div class="new-label">
@@ -156,7 +156,7 @@
 									</div>
 								</div>
 								<div class="product-desc">
-									<a href="/product-detail/<%= relatedProduct['_id'] %>" class="product-name text-uppercase"><%= relatedProduct.name %></a>
+									<a href="/product-detail/<%= relatedProduct._id %>" class="product-name text-uppercase"><%= relatedProduct.name %></a>
 									<span class="product-pricce">$<%= relatedProduct.price %></span>
 								</div>
 							</div>

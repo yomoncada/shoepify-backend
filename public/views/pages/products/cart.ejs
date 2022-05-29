@@ -60,25 +60,25 @@
 									</tr>
 								</thead>
 								<tbody>
-									<% cart.products.forEach(function(product, index, products) { %>
+									<% cart.products.forEach(function(cartProduct, index, cartProducts) { %>
 										<tr data-product-row-index="<%= index %>">
 											<td class="text-left">
 												<div class="seller-box align-flax w-100">
 													<div class="seller-img">
-														<a href="/product-detail/<%= product.id %>" class="display-b">
-															<img src="<%= product.thumbnail %>" alt="shoes" class="transition">
+														<a href="/product-detail/<%= cartProduct.product.id %>" class="display-b">
+															<img src="<%= cartProduct.product.thumbnail %>" alt="shoes" class="transition">
 														</a>
 													</div>
 													<div class="seller-contain pl-15">
-														<a href="/product-detail/<%= product.id %>" target="_blank" class="product-name text-uppercase"><%= product.name %></a>
+														<a href="/product-detail/<%= cartProduct.product.id %>" target="_blank" class="product-name text-uppercase"><%= cartProduct.product.name %></a>
 													</div>
 												</div>
 											</td>
-											<td><span class="price">$<%= product.price %></span></td>
+											<td><span class="price">$<%= cartProduct.product.price %></span></td>
 											<td>
-												<select class="quantity_cart productQuantity" name="quantity_cart" data-product-price="<%= product.price %>" data-product-id="<%= product.id %>" data-cart-id="<%= cart.id %>" data-index="<%= index %>">
-													<% for (var i=1; i <=product.stock;  i++) { %>
-														<% if(i == 1) { %>
+												<select class="quantity_cart productQuantity" name="quantity_cart" data-product-price="<%= cartProduct.product.price %>" data-product-id="<%= cartProduct.product.id %>" data-cart-id="<%= cart.id %>" data-index="<%= index %>">
+													<% for (var i=1; i <=cartProduct.product.stock;  i++) { %>
+														<% if(i == cartProduct.quantity) { %>
 															<option value="<%= i %>" selected=""><%= i %></option>
 															<% } else{ %>  
 															<option value="<%= i %>"><%= i %></option>
@@ -86,11 +86,11 @@
 													<% } %>
 												</select>
 											</td>
-											<td><span class="price">$<%= product.price %></span></td>
+											<td><span class="price">$<%= cartProduct.product.price * cartProduct.quantity %></span></td>
 											<td>
 												<ul>
 													<li><a href="/cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
-													<li><a href="javascript:;" class="deleteCartProduct" data-index="<%= index %>" data-cart-id="<%= cart.id %>" data-product-id="<%= product.id %>"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+													<li><a href="javascript:;" class="deleteCartProduct" data-index="<%= index %>" data-cart-id="<%= cart.id %>" data-product-id="<%= cartProduct.product.id %>"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
 												</ul>
 											</td>
 										</tr>

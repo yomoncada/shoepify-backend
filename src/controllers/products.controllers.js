@@ -28,10 +28,6 @@ const getProductById = async (req, res, next) => {
 
 const createProduct = async (req, res, next) => {
     try {
-        console.log('createProduct');
-        console.log(req.body);
-        console.log(req.fields);
-        console.log(req.field);
         const { name, description, code, thumbnail, price, stock } = req.body;
 
         if ( !name || !description || !code || !thumbnail || !price || !stock ) {

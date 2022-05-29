@@ -126,7 +126,7 @@
 							<% products.forEach(function(product, index, products) { %>
 								<div class="featured-product mb-25">
 									<div class="product-img transition mb-15">
-										<a href="/product-detail/<%= product['_id'] %>">
+										<a href="/product-detail/<%= product._id %>">
 											<img src="<%= product.thumbnail %>" alt="product" class="transition">
 										</a>
 										<div class="new-label">
@@ -137,7 +137,7 @@
 										</div>
 									</div>
 									<div class="product-desc">
-										<a href="/product-detail/<%= product['_id'] %>" class="product-name text-uppercase"><%= product.name %></a>
+										<a href="/product-detail/<%= product._id %>" class="product-name text-uppercase"><%= product.name %></a>
 										<span class="product-pricce">$<%= product.price %></span>
 									</div>
 								</div>
