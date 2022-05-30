@@ -2,6 +2,8 @@ require('dotenv').config()
 const twilio = require('twilio');
 const twilioConfig = require('../config/twilio.config.js');
 
+console.log(twilioConfig);
+
 const twilioClient = twilio(twilioConfig.accountSID, twilioConfig.authToken);
 
 const adminPhoneNumber = process.env.ADMIN_PHONE_NUMBER || '+541124992375';
@@ -26,6 +28,8 @@ const send = async (template, data) => {
         }
 
         options.body = body;
+
+        console.log(options);
 
         return await twilioClient.messages.create(options);
     } catch(error) {

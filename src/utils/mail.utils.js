@@ -2,6 +2,8 @@ require('dotenv').config()
 const nodemailer = require('nodemailer');
 const nodemailerConfig = require('../config/nodemailer.config.js');
 
+console.log(nodemailerConfig);
+
 const transporter = nodemailer.createTransport(nodemailerConfig);
 const defaulOptions = {
     from: 'Shoepify',
@@ -114,6 +116,8 @@ const send = async (template, data) => {
                 options.html = html;
                 break;
         }
+
+        console.log(options);
 
         return await transporter.sendMail(options)
     } catch(error) {
