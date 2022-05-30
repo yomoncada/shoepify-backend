@@ -1,6 +1,4 @@
 const express = require('express');
-const formidable = require('express-formidable');
-const bodyParser = require('body-parser')
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const passport = require('../middlewares/passport');
@@ -10,7 +8,6 @@ const { Server: SocketServer } = require('socket.io')
 
 const dbConfig = require('../config/db.config');
 const routes = require('../routers/index');
-/* const { MessagesDao, ProductsDao } = require('../model/daos/index'); */
 const logger = require('../utils/logger.utils');
 
 const init = (args) => {
@@ -20,13 +17,9 @@ const init = (args) => {
     const httpServer = new HttpServer(app)
     const io = new SocketServer(httpServer)
 
-    /* const Message = new MessagesDao;
-    const Product = new ProductsDao; */
-
     app.use(express.static('public'));
     app.use(express.json());
     app.use(express.urlencoded({extended: true}));
-    /* app.use(formidable()); */
 
     app.set('views', './public/views');
     app.set('view engine', 'ejs');
