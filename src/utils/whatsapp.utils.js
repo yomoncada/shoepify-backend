@@ -33,6 +33,7 @@ const send = async (template, data) => {
 
         return await twilioClient.messages.create(options);
     } catch(error) {
+        return [];
         throw new Error(error.message);
     }
 }
