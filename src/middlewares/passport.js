@@ -3,6 +3,8 @@ const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 
 const { UsersDao } = require('../model/daos/index');
+const mailUtil = require('../utils/mail.utils');
+const whatsappUtil = require('../utils/whatsapp.utils');
 
 const User = new UsersDao();
 
@@ -44,6 +46,11 @@ passport.use('register', new LocalStrategy(
       };
 
       const user = await User.create(newUser);
+
+      if (user) {
+        await mailUtil.send('user', {user: newUser});
+        await whatsappUtil.send('user', {user: newUser});
+      }
 
       return done(null, user);
     } catch (error) {

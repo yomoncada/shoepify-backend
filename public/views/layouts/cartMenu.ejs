@@ -1,0 +1,39 @@
+<div class="cart-menu">
+    <div class="cart-icon position-r">
+        <img src="/images/car-icon-w.png" class="position-r transition" alt="cart">
+    </div>
+    <div class="cart-dropdown header-link-dropdown">
+        <ul class="cart-list link-dropdown-list">
+            <% cart.products.forEach(function(cartProduct, index, cartProducts) { %>
+                <li>
+                    <figure> 
+                        <a href="/product-detail/<%= cartProduct.product.id %>" class="pull-left"> 
+                            <img alt="product" src="<%= cartProduct.product.thumbnail %>">
+                        </a>
+                        <figcaption> 
+                            <span>
+                                <a href="/product-detail/<%= cartProduct.product.id %>"><%= cartProduct.product.name %></a>
+                            </span>
+                            <p class="cart-price">$<%= cartProduct.product.price %></p>
+                            <div class="product-qty">
+                                <label>Qty:</label>
+                                <div class="custom-qty">
+                                    <input type="text" name="qty" maxlength="<%= cartProduct.product.stock %>" value="<%= cartProduct.quantity %>" title="Qty" class="input-text qty" disabled>
+                                </div>
+                            </div>
+                        </figcaption>
+                    </figure>
+                </li>
+            <% }); %>
+        </ul>
+        <p class="cart-sub-totle">
+            <span class="pull-left">Cart Subtotal</span> 
+            <span class="pull-right"><strong class="price-box">$<%= cart.total %></strong></span> 
+        </p>
+        <div class="clearfix"></div>
+        <div class="mt-20"> 
+            <a href="/cart" class="btn">Cart</a> 
+            <a href="/checkout" class="btn btn-color right-side">Checkout</a> 
+        </div>
+    </div>
+</div>

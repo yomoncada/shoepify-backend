@@ -15,8 +15,7 @@ const UserSchema = new mongoose.Schema({
     address: { type: String },
     age: { type: String },
     phoneNumber: { type: String },
-    avatar: { type: Object },
-    /* avatar: { type: String }, */
+    avatar: { type: Object, required: true},
     createdAt: { type: Date, required: true },
     updatedAt: { type: Date, required: true }
 });

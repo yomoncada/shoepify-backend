@@ -1,0 +1,21 @@
+<% cart.products.forEach(function(cartProduct, index, cartProducts) { %>
+<li> 
+    <figure> 
+        <a href="/product-detail/<%= cartProduct.product.id %>" class="pull-left"> 
+            <img alt="product" src="<%= cartProduct.product.thumbnail %>">
+        </a>
+        <figcaption> 
+            <span>
+                <a href="/product-detail/<%= cartProduct.product.id %>"><%= cartProduct.product.name %></a>
+            </span>
+            <p class="cart-price">$<%= cartProduct.product.price %></p>
+            <div class="product-qty">
+                <label>Qty:</label>
+                <div class="custom-qty">
+                    <input type="text" name="qty" maxlength="<%= cartProduct.product.stock %>" value="<%= cartProduct.quantity %>" title="Qty" class="input-text qty" disabled>
+                </div>
+            </div>
+        </figcaption>
+    </figure>
+</li>
+<% }); %>

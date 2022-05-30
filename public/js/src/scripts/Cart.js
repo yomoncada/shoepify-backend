@@ -135,9 +135,9 @@ class Cart {
 
                 products.forEach((product, index, products) => {
                     const row = $(`[data-product-row-index="${index}"]`);
-                    const priceText = row.find('.price');
+                    const priceText = row.find('.subTotal');
 
-                    priceText.text(product.price);
+                    priceText.text(`$${product.price}`);
                     total += product.price;
                 });
 
