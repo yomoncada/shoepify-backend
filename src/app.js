@@ -1,4 +1,3 @@
-// TODO: Probablemente esto pueda pasar a ser un Util.
 require('dotenv').config()
 const express = require('express');
 const session = require('express-session');
