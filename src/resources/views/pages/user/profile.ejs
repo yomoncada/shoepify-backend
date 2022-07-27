@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<%- include('../../layouts/head.ejs') %>
+	</head>
+	<body>
+    <!-- Start preloader -->
+		<div id="preloader"></div>
+		<!-- End preloader -->
+
+		<!-- Search Screen start -->
+		<div class="sidebar-search-wrap">
+		    <div class="sidebar-table-container">
+			    <div class="sidebar-align-container">
+			        <div class="search-closer right-side"></div>
+			        <div class="search-container">
+			          <form method="get" id="search-form">
+			            <input type="text" id="s" class="search-input" name="s" placeholder="Search text">
+			          </form>
+			          <span>Search and Press Enter</span>
+			        </div>
+			    </div>
+		    </div>
+		</div>
+		<!-- Search Screen end -->
+
+		<div id="newslater-popup" class="mfp-hide white-popup-block open align-center">
+			<div class="nl-popup-main">
+			    <div class="nl-popup-inner">
+				    <div class="newsletter-inner">
+				    	<div class="row">
+				    		<div class="col-md-6"></div>
+				    		<div class="col-md-6">
+				    			<div class="mtb-30 text-center">
+							        <h2 class="main_title">Subscribe Emails</h2>
+							        <span class="sub-title mb-30">Sign up & get 10% off</span>
+							        <form>
+							        	<input type="email" placeholder="Email Here..." required>
+							        	<button class="btn-color big-width btn" title="Subscribe">Subscribe</button>
+							        </form>
+							        <div class="check-box mt-30">
+										<span>
+			                            	<input type="checkbox" class="checkbox" id="different-address" name="Ship to a different address?">
+			                            	<label for="different-address">Don`t show this popup again</label>
+			                            </span>
+		                            </div>
+	                            </div>
+					        </div>
+				        </div>
+				    </div>
+			    </div>
+			</div>
+		</div>
+		<div class="main" id="main">
+      <%- include('../../layouts/header.ejs') %>
+
+      <section class="login pt-100">
+        <div class="container">
+          <div class="billing-details">
+            <h2 class="checkout-title text-uppercase text-center mb-30">PROFILE</h2>
+            <form class="checkout-form" action="/profile" enctype="multipart/form-data" method="POST" id="profileForm">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input class="form-control" type="text" name="name" id="name" placeholder="Enter your name" value="<%= user.name %>" readonly>
+              </div>
+              <div class="form-group">
+                <label for="address">Address</label>
+                <textarea class="form-control" name="address" id="address" placeholder="Enter your address" readonly><%= user.address %></textarea>
+              </div>
+              <div class="form-group">
+                <label for="age">Age</label>
+                <input class="form-control" type="number" name="age" id="age" placeholder="Enter your age" value="<%= user.age %>" readonly>
+              </div>
+              <div class="form-group">
+                <label for="phoneNumber">Phone Number</label>
+                <input class="form-control" type="tel" name="phoneNumber" id="phoneNumber" placeholder="Enter your phone number" value="<%= user.phoneNumber %>" readonly>
+              </div>
+              <div class="form-group">
+                <label for="avatar">Avatar</label>
+                <img class="img-fluid profile-avatar" src="/static/images/avatars/<%= user.avatar %>"/>
+                <!--<input type="file" name="avatar" id="avatar"/>-->
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input class="form-control" type="text" name="email" id="email" placeholder="Enter an email address" value="<%= user.email %>" readonly>
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input class="form-control" type="password" name="password" id="password" placeholder="Enter a password" readonly>
+              </div>
+              <div class="form-group">
+                <label for="repeatedPassword">Re-enter Password</label>
+                <input class="form-control" type="password" name="repeatedPassword" id="repeatedPassword" placeholder="Re-enter Password" readonly>
+              </div>
+              <div class="login-btn-g">
+                <div class="row">
+                  <div class="col-12">
+                    <button name="submit" type="submit" class="btn btn-color right-side">Update</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <%- include('../../layouts/topScrolling.ejs') %>
+			<%- include('../../layouts/footer.ejs') %>
+		</div>
+    <%- include('../../layouts/scripts.ejs') %>
+    <script>
+      const phoneInputField = document.querySelector("#phoneNumber");
+      const phoneInput = window.intlTelInput(phoneInputField, {
+        utilsScript:
+          "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+      });
+    </script>
+	</body>
+</html>

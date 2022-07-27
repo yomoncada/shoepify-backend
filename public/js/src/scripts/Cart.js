@@ -3,7 +3,7 @@ const addProductToCart = (cartId, productId, quantity) => {
         function(resolve, reject) {
             axios({
                 method: "post",
-                url: `/carts/${cartId}/products`,
+                url: `/api/carts/${cartId}/products`,
                 data: {
                     productId: productId,
                     quantity: quantity
@@ -24,7 +24,7 @@ const deleteProductFromCart = (cartId, productId) => {
         function(resolve, reject) {
             axios({
                 method: "delete",
-                url: `/carts/${cartId}/products/${productId}`
+                url: `/api/carts/${cartId}/products/${productId}`
             })
             .then(async function (response) {
                 resolve(response.data);
@@ -41,7 +41,7 @@ const updateCartProducts = (cartId, cartProducts) => {
         function(resolve, reject) {
             axios({
                 method: "patch",
-                url: `/carts/${cartId}/products`,
+                url: `/api/carts/${cartId}/products`,
                 data: {
                     cartProducts: cartProducts
                 }

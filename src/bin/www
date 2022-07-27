@@ -1,0 +1,139 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var app = require('../app');
+var debug = require('debug')('cryptar:server');
+const { Server: HttpServer } = require('http')
+const { Server: SocketServer } = require('socket.io');
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+const httpServer = new HttpServer(app)
+
+/**
+ * Create WS server.
+ */
+const socketIoServer = new SocketServer(httpServer)
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+httpServer.listen(port);
+httpServer.on('error', onError);
+httpServer.on('listening', onListening);
+
+/* const ChatRoomsController = require('../app/Controllers/Ws/ChatRoomsController');
+const MessagesController = require('../app/Controllers/Ws/MessagesController');
+const TestsController = require('../app/Controllers/Ws/TestsController');
+const UsersController = require('../app/Controllers/Ws/UsersController'); */
+
+const onConnection = async (socket) => {
+  /* const DEFAULT_CHATROOM = '62d60f860c3c2ff7f045c2e8'; */
+
+  /* const ChatRoomsHandler = new ChatRoomsController(socketIoServer, socket);
+  const MessagesHandler = new MessagesController(socketIoServer, socket);
+  const TestsHandler = new TestsController(socketIoServer, socket);
+  const UsersHandler = new UsersController(socketIoServer, socket); */
+
+    /* console.log(socket.id); // Set { <socket.id> } */
+    /* socket.join(`${DEFAULT_CHATROOM}`); */
+    /* console.log(socket.rooms); */
+    /* const allSockets = await socket.in(`${DEFAULT_CHATROOM}`).allSockets();
+    console.log(allSockets); */
+
+    /* socket.on('test', TestsHandler.onTest)
+    socket.on('new message', MessagesHandler.onNewMessage)
+    socket.on('new photo', UsersHandler.onNewPhoto)
+    socket.on('user connected', UsersHandler.onUserConnected)
+    socket.on('user joined', ChatRoomsHandler.onUserJoined)
+    socket.on('user left', ChatRoomsHandler.onUserLeft)
+    socket.on('enter private chat', ChatRoomsHandler.onEnterPrivateChat)
+    socket.on('enter group chat', ChatRoomsHandler.onEnterGroupChat)
+    socket.on('typing', ChatRoomsHandler.onTyping)
+    socket.on('stop typing', ChatRoomsHandler.onStopTyping) */
+    
+    /* socket.on('disconnect', (reason) => {
+      const { user } = socket.data
+
+      socketIoServer.emit('user disconnected', user)
+    }) */
+
+    /* console.log(allSockets);
+    socketIoServer.to('general').emit('test', {test: 'test'})
+    socketIoServer.emit('test', {test: 'test'})
+    */
+}
+
+socketIoServer.on('connection', onConnection);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = httpServer.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+  console.log(`Listening on http://localhost:${addr.port}/`);
+}

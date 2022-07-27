@@ -1,31 +1,34 @@
 {
-  "name": "shoepify-backend",
-  "version": "1.0.0",
-  "description": "",
-  "main": "src/index.js",
+  "name": "cryptar",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "start": "node .",
-    "start-dev": "nodemon node ."
+    "start": "node ./src/bin/www",
+    "start-dev": "nodemon ./src/bin/www"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
-    "cluster": "^0.7.7",
     "connect-mongo": "^4.6.0",
-    "dotenv": "^16.0.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
     "ejs": "^3.1.8",
-    "express": "^4.17.3",
+    "express": "~4.16.1",
     "express-session": "^1.17.3",
-    "firebase-admin": "^10.0.2",
-    "mongoose": "^6.2.8",
-    "multer": "^1.4.4",
-    "nodemailer": "^6.7.5",
+    "mongoose": "^6.4.4",
+    "morgan": "~1.9.1",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.7.7",
     "passport": "^0.6.0",
+    "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "socket.io": "^4.5.1",
-    "twilio": "^3.77.1",
-    "winston": "^3.7.2"
+    "twilio": "^3.80.0",
+    "winston": "^3.8.1"
+  },
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "dotenv": "^16.0.1",
+    "faker": "^6.6.6",
+    "supertest": "^6.2.4"
   }
 }

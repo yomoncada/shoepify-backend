@@ -3,7 +3,7 @@ const createOrder = (userId, cartId) => {
         function(resolve, reject) {
             axios({
                 method: "post",
-                url: `/orders/`,
+                url: `/api/orders/`,
                 data: {
                     userId,
                     cartId
